@@ -115,21 +115,7 @@ public class CustomCommandActivity extends BaseActivity implements SensorEventLi
             }
         });
 
-        // convert input stream to file object
-        InputStream inputStream = getResources().openRawResource(R.raw.bin_template);
-
-        try{
-            bin_template = File.createTempFile("pre", "suf");
-            OutputStream outputStream = new FileOutputStream(bin_template);
-            byte[] buffer = new byte[1024];
-            int read;
-            while((read = inputStream.read(buffer)) != -1){
-                outputStream.write(buffer, 0, read);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Can't create temp file ", e);
-        }
+        dfuManager.init();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -166,7 +152,6 @@ public class CustomCommandActivity extends BaseActivity implements SensorEventLi
             @Override
             public void onClick(View view) {
                 reportTV.setText("Updating Dial!");
-                dfuManager.init();
                 updateDial(true, angle);
             }
         });
@@ -231,11 +216,27 @@ public class CustomCommandActivity extends BaseActivity implements SensorEventLi
                     Bitmap actualBackground = dialView.createActualBackground();
                     dialView.createActualPreview(100, 200);
 
+                    // convert input stream to file object
+                    InputStream inputStream = getResources().openRawResource(R.raw.bin_template);
 
+                    try{
+                        bin_template = File.createTempFile("pre", "suf");
+                        OutputStream outputStream = new FileOutputStream(bin_template);
+                        byte[] buffer = new byte[1024];
+                        int read;
+                        while((read = inputStream.read(buffer)) != -1){
+                            outputStream.write(buffer, 0, read);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException("Can't create temp file ", e);
+                    }
 
                     DialWriter dialWriter = new DialWriter(bin_template, actualBackground, preview, DialDrawer.Position.BOTTOM, false);
                     try {
                         File new_dial = File.createTempFile("dial", ".bin");
+
+
 
                         dialWriter.setCopyFile(new_dial);
                         dialWriter.setAutoScalePreview(true);
