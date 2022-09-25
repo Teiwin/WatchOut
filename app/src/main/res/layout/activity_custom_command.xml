@@ -16,6 +16,15 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="768dp" />
 
+    <com.htsmart.wristband2.dial.DialView
+        android:id="@+id/dial_view2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_set"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        app:dv_scale_type="center_crop" />
+
     <TextView
         android:id="@+id/report_view"
         android:layout_width="wrap_content"
@@ -26,14 +35,39 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_conversion_absoluteWidth="301dp" />
 
-    <com.htsmart.wristband2.dial.DialView
-        android:id="@+id/custom_dial_view"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dv_scale_type="center_crop"
-        tools:layout_conversion_absoluteHeight="593dp"
-        tools:layout_editor_absoluteY="175dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_conversion_absoluteWidth="593dp" />
+        android:text="Update" />
+
+    <TextView
+        android:id="@+id/text_gps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GPS" />
+
+    <TextView
+        android:id="@+id/text_orientation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Orientation" />
+
+    <Button
+        android:id="@+id/update_dial_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Dial" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="KIN:" />
+
+    <TextView
+        android:id="@+id/kin_coords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="kine" />
 
 </LinearLayout>
